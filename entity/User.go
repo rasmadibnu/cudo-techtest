@@ -2,7 +2,7 @@ package entity
 
 import "time"
 
-type Users struct {
+type User struct {
 	ID              int64     `gorm:"column:id" json:"id"`
 	Name            string    `gorm:"column:name;NOT NULL" json:"name"`
 	Email           string    `gorm:"column:email;NOT NULL" json:"email"`
@@ -13,6 +13,6 @@ type Users struct {
 	UpdatedAt       time.Time `gorm:"column:updated_at" json:"updated_at"`
 }
 
-func (m *Users) TableName() string {
+func (m *User) TableName() string {
 	return "users"
 }

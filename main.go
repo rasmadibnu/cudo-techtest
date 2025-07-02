@@ -2,6 +2,9 @@ package main
 
 import (
 	"cudo-techtest/config"
+	"cudo-techtest/controller"
+	"cudo-techtest/repository"
+	"cudo-techtest/service"
 	"fmt"
 	"log"
 
@@ -36,6 +39,12 @@ func main() {
 		AllowHeaders:     []string{"Accept", "Content-Type", "Authorization"},
 		AllowCredentials: true,
 	}))
+
+	v1 := r.Group("/api/v1")
+
+	transactionRepo := repository.NewTransactionRepository(db)
+	transactionService := service.NewTransactionService(transactionRepo)
+	controller.NewTransactionController(v1, transactionService)
 
 	r.Run(":6565")
 }
